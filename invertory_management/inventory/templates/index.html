@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <br>
+    <div class = "button-group">
+        <a href="{% url 'display_laptops' %}" class="btn btn-primary text-dark btn-lg" role="button" style="background-color:#f2c1c1; border:3px solid #f2c1c1"> Laptops</a> 
+        <a href="{% url 'add_laptop' %}" class="btn btn-primary btn-sm" role="button" style="background-color:#c49353; border:1px solid white"> +</a> 
+        <a href="{% url 'display_desktops' %}" class="btn btn-primary text-dark btn-lg" role="button" style="background-color:#c3efe6;border:3px solid #c3efe6"> Desktops</a>
+        <a href="{% url 'add_desktop' %}" class="btn btn-primary btn-sm" role="button" style="background-color:#c49353;border:1px solid white"> +</a>
+        <a href="{% url 'display_mobile' %}" class="btn btn-primary text-dark btn-lg" role="button" style="background-color:#f7f6d6;border:3px solid #f7f6d6"> Mobile</a>
+        <a href="{% url 'add_mobile' %}" class="btn btn-primary btn-sm" role="button" style="background-color:#c49353;border:1px solid white"> +</a>
+    </div>
+    <br>
+    <p class="h4 text-light"> Curently Viewing {{header}} </p>
+    <table class="table table-hover table-striped"style="background-color:#283973;">    
+        <thead style="background-color: #1AD78B ;">
+            <tr style="font-size:20px;border-top:5px solid #1AD78B;border-bottom:5px solid #1AD78B;color:white">
+                <th>BRAND</th>
+                <th>MODEL</th>
+                <th>SERIAL</th>
+                <th>PRICE</th>
+                <th>STATUS</th>
+                <th> </th>
+            </tr>
+        </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr style="color:white;border-top:5px solid #283973;border-bottom:5px solid #283973">
+                        <td>{{item.brand}}</td>
+                        <td>{{item.model}}</td>
+                        <td>{{item.serial}}</td>
+                        <td>{{item.price}}</td>
+                        <td>{{item.status}}</td>
+                        {% if header == "Laptop" %}
+                        <td>
+                            <a href="{% url 'edit_laptop' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                            <a href="{% url 'delete_laptop' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+                        </td>
+                        {% elif header == "Desktop" %}
+                        <td>
+                            <a href="{% url 'edit_desktop' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                            <a href="{% url 'delete_desktop' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+                        </td>
+                        {% else %}
+                        <td>
+                            <a href="{% url 'edit_mobile' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                            <a href="{% url 'delete_mobile' item.pk %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+                        </td>
+                        {% endif%}
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        
+    </table>
+{% endblock %}

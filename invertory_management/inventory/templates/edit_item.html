@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% block body %}
+
+<div class = "container">
+    
+    <form method ="POST">
+        <br>
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group row" >
+            <label for="id_{{ field.name }}" style="font-family:Century Gothic; font-size: 21px" class="col-1  text-white ">{{field.label}}</label>
+            <div class="col-9">
+                {{ field }}
+            </div>
+        </div>
+        {% endfor %}
+        <button type ="submit" class="btn btn-primary" name="button">Edit Device</button>
+        <a href="{% url 'index' %}" class="btn btn-primary text-white btn-md" role="button" style="background-color:#8d3131"> Back</a> 
+
+    </form>
+</div>
+{%endblock%}
